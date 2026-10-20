@@ -1,0 +1,12 @@
+# Copy file này thành glossary.txt rồi điền tên riêng trong campaign của bạn: NPC, địa danh, thần, phe phái, vật phẩm...
+# Mỗi dòng một tên. Sau dấu "|" là các cách STT hay nghe nhầm, để LLM sửa lại.
+# Dòng bắt đầu bằng # là ghi chú. Whisper chỉ đọc được phần đầu file, nên đặt tên hay nhắc nhất lên trên.
+# Lưu ý: notes.md được đăng lên kênh Discord, đừng ghi tên bí mật của DM vào đây.
+tổ trưởng | tổ lợi trưởng
+initiative
+saving throw
+Insight check
+advantage | ét văn tịch
+disadvantage
+hit point | hít poi
+spell slot

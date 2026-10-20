@@ -1,0 +1,10 @@
+node_modules/
+.env
+sessions/
+stt/.venv/
+stt/__pycache__/
+config/players.json
+config/optout.json
+*.log
+config/glossary.txt
+.claude/

@@ -1,0 +1,6 @@
+{
+  "_huong_dan": "Copy file này thành players.json. Key là Discord User ID (chuột phải tên -> Copy User ID khi bật Developer Mode). role: dm | player.",
+  "123456789012345678": { "name": "An", "character": "DM", "role": "dm" },
+  "234567890123456789": { "name": "Minh", "character": "Thorin", "role": "player" },
+  "345678901234567890": { "name": "Lan", "character": "Elara", "role": "player" }
+}
