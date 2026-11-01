@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>STT Bot DnD</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2.5 28 9.5v13L16 29.5 4 22.5v-13z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M16 2.5 9.5 13h13zM4 9.5 9.5 13 4 22.5M28 9.5 22.5 13 28 22.5M9.5 13 16 29.5 22.5 13" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round" opacity=".55"/></svg>
+        </div>
+        <div class="brand-name">STT Bot</div>
+      </div>
+
+      <nav class="nav" id="nav">
+        <button class="nav-item" data-action="nav" data-page="home"><i data-icon="home"></i><span>Tổng quan</span></button>
+        <button class="nav-item" data-action="nav" data-page="sessions"><i data-icon="scroll"></i><span>Buổi chơi</span><em class="nav-count" id="nav-sessions"></em></button>
+        <button class="nav-item" data-action="nav" data-page="campaign"><i data-icon="users"></i><span>Chiến dịch</span></button>
+        <button class="nav-item" data-action="nav" data-page="settings"><i data-icon="settings"></i><span>Cài đặt</span></button>
+        <button class="nav-item" data-action="nav" data-page="log"><i data-icon="terminal"></i><span>Nhật ký</span></button>
+      </nav>
+
+      <div class="sidebar-foot" id="sidebar-bot"></div>
+    </aside>
+
+    <main class="main" id="view">
+      <div class="boot"><div class="spinner"></div></div>
+    </main>
+  </div>
+
+  <div class="drawer-backdrop" id="drawer-backdrop" data-action="closeDrawer"></div>
+  <aside class="drawer" id="drawer" aria-hidden="true"></aside>
+  <div class="overlay" id="modal"></div>
+  <div class="overlay overlay--wizard" id="wizard"></div>
+  <div class="toasts" id="toasts"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

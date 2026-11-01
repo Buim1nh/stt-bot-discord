@@ -1,0 +1,4 @@
+# Thư viện CUDA 12 + cuDNN 9 cho CTranslate2 chạy trên GPU NVIDIA (không cần cài CUDA Toolkit riêng).
+# Chỉ cài khi máy có GPU NVIDIA, khoảng 2GB.
+nvidia-cublas-cu12
+nvidia-cudnn-cu12>=9,<10

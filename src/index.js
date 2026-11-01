@@ -195,5 +195,12 @@ process.on('unhandledRejection', (err) => console.error('[bot] lỗi không bắ
 process.on('uncaughtException', (err) => console.error('[bot] lỗi không bắt được:', err));
 process.on('SIGINT', shutdown);
 process.on('SIGTERM', shutdown);
+// STTBot.exe không gửi được Ctrl+C cho tiến trình con, nên nó gửi dòng "stop" qua stdin
+if (process.env.BOT_STDIN_CONTROL === '1') {
+  process.stdin.setEncoding('utf8');
+  process.stdin.on('data', (text) => {
+    if (/^stop\s*$/m.test(text)) shutdown();
+  });
+}
 
 client.login(config.token);

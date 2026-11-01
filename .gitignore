@@ -8,3 +8,5 @@ config/optout.json
 *.log
 config/glossary.txt
 .claude/
+dist/
+build/cache/

@@ -12,6 +12,11 @@ if (-not (Test-Path 'stt\.venv\Scripts\python.exe')) {
 }
 & stt\.venv\Scripts\python.exe -m pip install --upgrade pip
 & stt\.venv\Scripts\python.exe -m pip install -r stt\requirements.txt
+if (Get-Command nvidia-smi -ErrorAction SilentlyContinue) {
+    & stt\.venv\Scripts\python.exe -m pip install -r stt\requirements-gpu.txt
+} else {
+    Write-Host 'Không thấy GPU NVIDIA, bỏ qua thư viện CUDA. Nhớ đặt WHISPER_DEVICE=cpu và WHISPER_COMPUTE_TYPE=int8 trong .env'
+}
 
 Write-Host '== File cấu hình =='
 if (-not (Test-Path '.env')) { Copy-Item .env.example .env; Write-Host 'Đã tạo .env, nhớ điền DISCORD_TOKEN, DISCORD_CLIENT_ID, DISCORD_GUILD_ID' }

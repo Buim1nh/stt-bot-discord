@@ -1,0 +1,46 @@
+# Push tag dạng v0.2.0 thì build bộ cài Windows và đăng lên GitHub Releases.
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Cài Inno Setup
+        run: choco install innosetup --no-progress -y
+
+      - name: Đóng gói
+        shell: powershell
+        run: powershell -ExecutionPolicy Bypass -File build\build.ps1
+
+      - name: Đăng release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/STTBot-Setup-*.exe
+            dist/STTBot-portable-*.zip
+          body: |
+            **DM tải file `STTBot-Setup-….exe` bên dưới**, mở lên và làm theo hướng dẫn.
+            Hướng dẫn chi tiết: [docs/HUONG-DAN-CAI-DAT.md](https://github.com/${{ github.repository }}/blob/main/docs/HUONG-DAN-CAI-DAT.md)
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ !startsWith(github.ref, 'refs/tags/') }}
+        with:
+          name: STTBot-windows
+          path: |
+            dist/STTBot-Setup-*.exe
+            dist/STTBot-portable-*.zip

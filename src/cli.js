@@ -2,6 +2,7 @@
 //   npm run stt -- 2026-10-20_2000     (chỉ STT)
 //   npm run llm -- 2026-10-20_2000     (chỉ LLM)
 //   npm run process                    (cả hai, session mới nhất)
+import { config } from './config.js';
 import { resolveSessionDir, runLlm, runStt } from './pipeline.js';
 
 const [mode = 'all', target] = process.argv.slice(2);
@@ -20,7 +21,7 @@ try {
     const out = await runStt(dir, { onProgress: progress('STT') });
     console.log(`\nTranscript thô: ${out}`);
   }
-  if (mode === 'llm' || mode === 'all') {
+  if (mode === 'llm' || (mode === 'all' && config.llmProvider !== 'none')) {
     const out = await runLlm(dir, { onProgress: progress('LLM') });
     console.log('\nĐầu ra:', out);
   }

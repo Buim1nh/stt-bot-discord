@@ -9,7 +9,13 @@ Bot ngồi trong kênh voice Discord, ghi âm riêng từng người, chuyển t
                           ──► bot đăng recap + file lên kênh text
 ```
 
-## Cài đặt (một lần)
+## Cài bằng bộ cài (dành cho DM)
+
+Không cần biết lập trình: tải `STTBot-Setup-x.y.z.exe` ở trang [Releases](https://github.com/Buim1nh/stt-bot-discord/releases/latest), cài rồi mở **STT Bot DnD**. App có trình hướng dẫn từng bước (dán token, chọn server, cài Whisper, đăng nhập Claude), nút bật/tắt bot, xem recap và khai báo người chơi. Xem [hướng dẫn cài đặt](docs/HUONG-DAN-CAI-DAT.md).
+
+Phần dưới đây dành cho người muốn chạy từ mã nguồn.
+
+## Cài đặt từ mã nguồn (một lần)
 
 ### 1. Tạo bot trên Discord
 1. Vào https://discord.com/developers/applications, bấm **New Application**, đặt tên (vd. "Biên Niên Ký").
@@ -73,6 +79,25 @@ Cả hai bước đều có cache. Nếu bị ngắt giữa chừng, chạy lạ
 - **Giọng văn recap**: sửa thẳng các file trong `prompts/`.
 - **Cắt đoạn**: `SILENCE_MS` là thời gian im lặng để cắt sang đoạn mới. Ai hay ngắt quãng khi nói thì tăng lên 1500–2000.
 - **Hết hạn mức Claude Pro**: đợi hạn mức hồi lại rồi chạy `npm.cmd run llm`, cache sẽ giữ phần đã làm. Hoặc đặt `LLM_PROVIDER=gemini` nếu đã cài và đăng nhập Gemini CLI.
+
+## Đóng gói bộ cài Windows
+
+```
+launcher/Launcher.cs   STTBot.exe: cửa sổ WebView2, cấu hình, cài STT, bật/tắt bot
+ui/                    giao diện HTML/CSS/JS của app
+build/build.ps1        đóng gói: node.exe, uv.exe, node_modules, STTBot.exe → dist/
+build/installer.iss    bộ cài Inno Setup
+```
+
+Build trên máy (cần Node.js 22.12+ và Inno Setup 6):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File build\build.ps1
+```
+
+Kết quả nằm trong `dist/`: `STTBot-Setup-<version>.exe` và bản portable `.zip`. Version lấy từ `package.json`. Để phát hành, tăng version trong `package.json` rồi push tag `v<version>`, GitHub Actions (`.github/workflows/release.yml`) sẽ build và đăng release.
+
+Bộ cài không chứa Python hay model. Lần đầu bấm cài, app dùng `uv` để tải Python 3.12, faster-whisper, thư viện CUDA (nếu có GPU NVIDIA) và model Whisper vào thư mục `runtime/` của app. Muốn mở DevTools khi sửa giao diện thì đặt biến môi trường `STTBOT_DEVTOOLS=1`.
 
 ## Lưu ý
 - Bot chỉ ghi khi có lệnh `/record start` và luôn thông báo công khai trong kênh. Hãy xin phép cả nhóm trước khi dùng.

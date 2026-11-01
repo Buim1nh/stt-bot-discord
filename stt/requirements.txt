@@ -1,4 +1,1 @@
 faster-whisper>=1.2.1
-# Thư viện CUDA 12 + cuDNN 9 cho CTranslate2 chạy trên GPU NVIDIA (không cần cài CUDA Toolkit riêng)
-nvidia-cublas-cu12
-nvidia-cudnn-cu12>=9,<10
